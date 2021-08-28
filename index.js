@@ -8,6 +8,14 @@ const PORT = process.env.PORT || 3700;
 app.use(express.static(path.join(__dirname, 'public')));
 
 //start the server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log('Server is ready on port:', PORT);
+});
+
+//websockets
+const SocketIO = require('socket.io');
+const IO = SocketIO(server);
+
+IO.on('connection', (socket)=>{
+    console.log('A new user is connected', socket.id);
 });
