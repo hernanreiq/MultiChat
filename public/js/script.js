@@ -35,10 +35,43 @@ createUsername();
 // ENVÍO DE MENSAJES
 btn_send.addEventListener('click', sendMessage);
 
-async function sendMessage(){
-    console.log({
-        username: username,
-        message: message.value
-    });
-    message.value = '';
+function sendMessage(){
+    if(!username){
+        createUsername();
+    } else {
+        if((message.value).length > 0){
+            socket.emit('chat_message', {
+                message: message.value,
+                username: username
+            });
+            message.value = '';
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Write a message to send'
+            });
+        }
+    }
 }
+
+// RECIBIENDO LOS DATOS Y PINTANDOLOS EN PANTALLA
+socket.on('chat_message', function(data){
+    output.innerHTML += `
+    <p><strong>${data.username}</strong>: ${data.message}</p>
+    `;
+    actions.innerHTML = '';
+});
+
+//ENVIANDOLE AL SERVIDOR CUANDO UN USUARIO ESTÁ ESCRIBIENDO
+message.addEventListener('keypress', aUserIsTyping);
+
+function aUserIsTyping(){
+    socket.emit('chat_typing', username);
+}
+
+//RECIBIENDO DEL SERVIDOR QUIEN ESTÁ ESCRIBIENDO (SI SOY YO NO ME LO DICE)
+socket.on('chat_typing', function(username){
+    actions.innerHTML = `<p class="typing">
+    ${username} is typing...
+    </p>`;
+});
