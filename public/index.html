@@ -19,16 +19,18 @@
     <main>
         <div class="container">
             <div id="chat-container" class="shadow p-3 rounded">
-                <div id="chat-window">
-                    <div id="output">
-
+                    <h2 class="text-center users" id="users-online"></h2>
+                    <div id="chat-window">
+                        <div id="output">
+    
+                        </div>
+                        <div id="actions">
+    
+                        </div>
                     </div>
-                    <div id="actions">
-
-                    </div>
+                    <textarea id="message" placeholder="Write your message" class="form-control"></textarea>
+                    <button id="send" class="btn btn-primary w-100 mt-3"><b>Send</b></button>
                 </div>
-                <textarea id="message" placeholder="Write your message" class="form-control"></textarea>
-                <button id="send" class="btn btn-primary w-100 mt-3"><b>Send</b></button>
             </div>
         </div>
     </main>

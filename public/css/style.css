@@ -11,7 +11,7 @@ header a {
 header a:hover {
     color: rgb(206, 175, 0);
 }
-h1, p {
+h1, p, h2.users {
     text-shadow: 0px 0px 3px black;
     color: rgb(255, 255, 255);
 }
@@ -38,7 +38,6 @@ button {
     font-weight: bold;
     text-transform: uppercase;
 }
-
 p.typing {
     font-style: italic;
 }

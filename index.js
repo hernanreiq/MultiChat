@@ -13,17 +13,22 @@ const server = app.listen(PORT, () => {
 });
 
 //websockets
-const SocketIO = require('socket.io');
-const IO = SocketIO(server);
+const Socketio = require('socket.io');
+const io = Socketio(server);
 
-IO.on('connection', (socket)=>{
-    console.log('A new user is connected', socket.id);
+io.on('connection', (socket)=>{
+    var countUsers = io.engine.clientsCount;
+    io.sockets.emit('users_online', countUsers);
     
     socket.on('chat_message', (data) => {
-        IO.sockets.emit('chat_message', data);
+        io.sockets.emit('chat_message', data);
     });
 
     socket.on('chat_typing', (username) => {
         socket.broadcast.emit('chat_typing', username);
+    });
+
+    socket.on('disconnect', () => {
+        io.sockets.emit('users_online', countUsers);
     });
 });

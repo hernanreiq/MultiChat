@@ -5,6 +5,7 @@ var btn_send = document.getElementById('send');
 var message = document.getElementById('message');
 var actions = document.getElementById('actions');
 var output = document.getElementById('output');
+var users_online = document.getElementById('users-online');
 
 //CREACION DEL NOMBRE DE USUARIO CON SWEET ALERT 2
 var username;
@@ -31,6 +32,15 @@ async function createUsername(){
 }
 
 createUsername();
+
+//CONTABILIZACION DE USUARIOS CONECTADOS
+socket.on('users_online', function(countUsers){
+    if(countUsers == 1){
+        users_online.innerHTML = 'There is <span class="badge badge-dark">1</span> user online';
+    } else {
+        users_online.innerHTML = `There are <span class="badge badge-dark">${countUsers}</span> users online`;
+    }
+});
 
 // ENVÍO DE MENSAJES
 btn_send.addEventListener('click', sendMessage);
