@@ -56,7 +56,7 @@ function sendMessage(){
                 username: username
             });
             output.innerHTML += `<div class="my-1 ml-5">
-                <div class="my_message rounded-left px-2 py-1 float-right">
+                <div class="my_message shadow px-2 py-1 float-right">
                     <b>${username}</b>:<br>${message_value}
                 </div>
             </div>
@@ -75,7 +75,7 @@ function sendMessage(){
 // RECIBIENDO LOS DATOS Y PINTANDOLOS EN PANTALLA
 socket.on('chat_message', function(data){
     output.innerHTML += `<div class="my-1 mr-5">
-        <div class="user_message rounded-right px-2 py-1 float-left">
+        <div class="user_message shadow px-2 py-1 float-left">
             <b>${data.username}</b>:<br>${data.message}
         </div>
     </div>

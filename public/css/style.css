@@ -48,10 +48,7 @@ p.typing {
     height: 445px;
     background-color: white;
     overflow-y: scroll;
-    background-image: url('../img/fondo.jpg');
-    background-position: center center;
-    background-size: cover;
-
+    background: #cf8068; 
 }
 #actions {
     min-height: 35px;
@@ -60,10 +57,12 @@ p.typing {
 .my_message {
     background-color: #ffd89b;
     color: black;
+    border-radius: 10px 10px 0px 10px;
 }
 .user_message {
     background-color: #19547b;
     color: white;
+    border-radius: 10px 10px 10px 0px;
 }
 .my_message, .user_message {
     text-shadow: none;
@@ -77,7 +76,7 @@ p.typing {
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+    background: #cf8068;
 }
 ::-webkit-scrollbar-thumb {
     background: #888; 
