@@ -41,3 +41,47 @@ button {
 p.typing {
     font-style: italic;
 }
+#chat-window {
+    height: 500px;
+}
+.output {
+    height: 445px;
+    background-color: white;
+    overflow-y: scroll;
+    background-image: url('../img/fondo.jpg');
+    background-position: center center;
+    background-size: cover;
+
+}
+#actions {
+    min-height: 35px;
+    background-color: #10171d;
+}
+.my_message {
+    background-color: #ffd89b;
+    color: black;
+}
+.user_message {
+    background-color: #19547b;
+    color: white;
+}
+.my_message, .user_message {
+    text-shadow: none;
+    text-align: left;
+    white-space: normal;
+    word-break: break-all;
+    display: inline-block;
+}
+/*BARRA DE SCROLL*/
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

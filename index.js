@@ -21,7 +21,7 @@ io.on('connection', (socket)=>{
     io.sockets.emit('users_online', countUsers);
     
     socket.on('chat_message', (data) => {
-        io.sockets.emit('chat_message', data);
+        socket.broadcast.emit('chat_message', data);
     });
 
     socket.on('chat_typing', (username) => {

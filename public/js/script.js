@@ -50,10 +50,18 @@ function sendMessage(){
         createUsername();
     } else {
         if((message.value).length > 0){
+            var message_value = message.value.replace(/\n/g, "<br>"); //SANEAMIENTO PARA RESPETARLOS SALTOS DE LINEA
             socket.emit('chat_message', {
-                message: message.value,
+                message: message_value,
                 username: username
             });
+            output.innerHTML += `<div class="my-1 ml-5">
+                <div class="my_message rounded-left px-2 py-1 float-right">
+                    <b>${username}</b>:<br>${message_value}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            `;
             message.value = '';
         } else {
             Swal.fire({
@@ -66,8 +74,12 @@ function sendMessage(){
 
 // RECIBIENDO LOS DATOS Y PINTANDOLOS EN PANTALLA
 socket.on('chat_message', function(data){
-    output.innerHTML += `
-    <p><strong>${data.username}</strong>: ${data.message}</p>
+    output.innerHTML += `<div class="my-1 mr-5">
+        <div class="user_message rounded-right px-2 py-1 float-left">
+            <b>${data.username}</b>:<br>${data.message}
+        </div>
+    </div>
+    <div class="clearfix"></div>
     `;
     actions.innerHTML = '';
 });
@@ -76,12 +88,16 @@ socket.on('chat_message', function(data){
 message.addEventListener('keypress', aUserIsTyping);
 
 function aUserIsTyping(){
-    socket.emit('chat_typing', username);
+    if(!username){
+        createUsername();
+    } else {
+        socket.emit('chat_typing', username);
+    }
 }
 
 //RECIBIENDO DEL SERVIDOR QUIEN ESTÁ ESCRIBIENDO (SI SOY YO NO ME LO DICE)
 socket.on('chat_typing', function(username){
-    actions.innerHTML = `<p class="typing">
+    actions.innerHTML = `<p class="typing mb-0 py-2 pl-2">
     ${username} is typing...
     </p>`;
 });
